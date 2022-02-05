@@ -9,6 +9,10 @@ pipeline {
         IMAGE_NAME = 'godgaji/mojongsab_frontend'
         DOCKER_IMAGE = ''
         DOCKERHUB_CREDENTIAL = 'dockerhub'
+
+        SLACK_CHANNEL = '#배포'
+        SLACK_TEAM_DOMAIN = 'mojongsab'
+        SLACK_TOKEN_CREDENTIAL = 'slack_mojongsab'
     }
 
     stages {
@@ -79,4 +83,26 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            slackSend (
+                channel: SLACK_CHANNEL,
+                color: '#00FF00',
+                message: "mojongsab frontend(${env.BRANCH_NAME}) - #${env.BUILD_NUMBER} Success after ${currentBuild.durationString.replace(' and counting', '')} (<${env.BUILD_URL}|Open>)",
+                teamDomain: SLACK_TEAM_DOMAIN,
+                tokenCredentialId: SLACK_TOKEN_CREDENTIAL
+            )
+        }
+        failure {
+            slackSend (
+                channel: SLACK_CHANNEL,
+                color: '#F01717',
+                message: "mojongsab frontend(${env.BRANCH_NAME}) - #${env.BUILD_NUMBER} Failure after ${currentBuild.durationString.replace(' and counting', '')} (<${env.BUILD_URL}|Open>)",
+                teamDomain: SLACK_TEAM_DOMAIN,
+                tokenCredentialId: SLACK_TOKEN_CREDENTIAL
+            )
+        }
+    }
+
 }
