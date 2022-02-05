@@ -74,7 +74,7 @@ pipeline {
                                     sourceFiles: '',
                                     removePrefix: '',
                                     remoteDirectory: '',
-                                    execCommand: 'sh ~/deploy-front.sh'
+                                    execCommand: 'sh ~/deploy.sh'
                                 )
                             ]
                         )
