@@ -22,7 +22,7 @@ function Redirect(): JSX.Element {
   };
 
   useEffect(() => {
-    // getAccess();
+    getAccess();
   });
 
   return <div>login success!</div>;
