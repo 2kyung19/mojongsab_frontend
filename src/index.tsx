@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from 'pages/Home';
 import SignIn from 'pages/SignIn';
 import NotFound from 'pages/NotFound';
+import Redirect from 'pages/SignIn/Redirect';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/login" element={<SignIn />} />
+        <Route path="/login/redirect/:token" element={<Redirect />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
